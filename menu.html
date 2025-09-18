@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>menu smsm</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+body {
+  font-family: 'Cairo', sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(45deg, #ffffff, #d4d087, #654321);
+  background-size: 600% 600%;
+  animation: gradientBG 20s ease infinite;
+  overflow-x: hidden;
+  color: #fff;
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 15px #654321;
+  margin-bottom: 20px;
+  animation: pulseText 2s infinite;
+}
+
+/* خانة العروض */
+.banner-container {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 30px;
+  border-radius: 15px;
+  height: 180px;
+  position: relative;
+}
+.banner-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: scale(1.2);
+  transition: all 1s ease-in-out;
+}
+
+/* form و button */
+.form-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.form-container input, .form-container button {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 15px;
+  border: 1px solid #654321;
+}
+.form-container button {
+  background: linear-gradient(45deg, #d4d087, #654321);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 15px #654321;
+  transition: all 0.3s;
+}
+.form-container button:hover {
+  transform: scale(1.1) rotate(-3deg);
+  box-shadow: 0 0 30px #d4d087;
+}
+
+/* المنتجات */
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f5f5dc, #d4d087);
+  box-shadow: 0 5px 25px rgba(101,67,33,0.5);
+  transition: transform 0.5s, box-shadow 0.5s;
+  opacity: 0;
+  transform: translateY(-100px) rotate(-20deg) scale(0.2);
+}
+
+.product-card.show {
+  animation: enter 0.8s forwards;
+}
+
+.product-card:hover {
+  transform: scale(1.12) rotate(3deg) translateY(-10px);
+  box-shadow: 0 20px 60px rgba(101,67,33,0.9);
+}
+
+.product-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: contain;
+  border-bottom: 2px solid #fff;
+  transition: transform 0.5s;
+}
+
+.product-card:hover img {
+  transform: scale(1.1);
+  filter: none;
+}
+
+.product-card .info {
+  padding: 15px;
+}
+.product-card .info h3 {
+  margin: 5px 0;
+  font-size: 18px;
+}
+.product-card .info p {
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(101,67,33,0.8);
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+.delete-btn:hover {
+  background: rgba(101,67,33,1);
+  transform: scale(1.3) rotate(-5deg);
+}
+
+/* أنميشن الدخول */
+@keyframes enter {
+  0% { opacity: 0; transform: translateY(-100px) rotate(-20deg) scale(0.2); filter: blur(10px);}
+  60% { opacity: 1; transform: translateY(10px) rotate(5deg) scale(1.05); filter: blur(0);}
+  100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1);}
+}
+
+/* أنميشن الخروج */
+@keyframes exit {
+  0% { opacity: 1; transform: scale(1) rotate(0deg) translateY(0);}
+  100% { opacity: 0; transform: scale(0.2) rotate(20deg) translateY(-100px); filter: blur(10px);}
+}
+
+/* أنميشن العروض */
+@keyframes bannerEnter {
+  0% { opacity: 0; transform: scale(1.2);}
+  50% { opacity: 1; transform: scale(1);}
+  100% { opacity: 1; transform: scale(1);}
+}
+@keyframes bannerExit {
+  0% { opacity: 1; transform: scale(1);}
+  100% { opacity: 0; transform: scale(0.8);}
+}
+
+/* خلفية متحركة */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* نص فاجر pulsating */
+@keyframes pulseText {
+  0%, 100% { text-shadow: 2px 2px 15px #654321; }
+  50% { text-shadow: 2px 2px 35px #d4d087; }
+}
+</style>
+</head>
+<body>
+
+<h1>Smsm menu✨</h1>
+
+<!-- خانة العروض -->
+<div class="banner-container" id="bannerContainer">
+  <img src="https://via.placeholder.com/800x180/FFFFFF/654321?text=عرض+1" alt="عرض 1">
+  <img src="https://via.placeholder.com/800x180/D4D087/654321?text=عرض+2" alt="عرض 2">
+  <img src="https://via.placeholder.com/800x180/654321/FFFFFF?text=عرض+3" alt="عرض 3">
+</div>
+
+<div class="form-container">
+  <input type="text" id="productName" placeholder="اسم المنتج">
+  <input type="text" id="productPrice" placeholder="السعر">
+  <input type="file" id="productImage" accept="image/*">
+  <button onclick="addProduct()">أضف المنتج</button>
+</div>
+
+<div class="products-container" id="productsContainer">
+  <!-- المنتجات ستظهر هنا -->
+</div>
+
+<audio id="addSound" src="https://www.soundjay.com/buttons/sounds/button-3.mp3"></audio>
+<audio id="deleteSound" src="https://www.soundjay.com/buttons/sounds/button-10.mp3"></audio>
+
+<script>
+const productsContainer = document.getElementById('productsContainer');
+const banners = document.querySelectorAll('#bannerContainer img');
+let currentBanner = 0;
+
+// إعداد العروض
+banners.forEach((img,i)=> i===0 ? img.style.opacity='1' : img.style.opacity='0');
+
+function showBanner(index){
+  banners.forEach((img,i)=>{
+    if(i===index){
+      img.style.animation='bannerEnter 1s forwards';
+      img.style.opacity='1';
+    }else{
+      img.style.animation='bannerExit 1s forwards';
+      img.style.opacity='0';
+    }
+  });
+}
+
+setInterval(()=>{
+  currentBanner = (currentBanner+1)%banners.length;
+  showBanner(currentBanner);
+},4000);
+
+function addProduct() {
+  const name = document.getElementById('productName').value;
+  const price = document.getElementById('productPrice').value;
+  const file = document.getElementById('productImage').files[0];
+
+  if(!name || !price || !file){
+    alert('من فضلك املأ كل الحقول واختر صورة');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const card = document.createElement('div');
+    card.classList.add('product-card');
+
+    card.innerHTML = `
+      <button class="delete-btn" onclick="deleteProduct(this)">حذف</button>
+      <img src="${e.target.result}" alt="${name}">
+      <div class="info">
+        <h3>${name}</h3>
+        <p>${price} ج</p>
+      </div>
+    `;
+    productsContainer.appendChild(card);
+
+    document.getElementById('addSound').play();
+
+    const index = productsContainer.children.length;
+    setTimeout(()=> card.classList.add('show'), index * 150);
+
+    document.getElementById('productName').value = '';
+    document.getElementById('productPrice').value = '';
+    document.getElementById('productImage').value = '';
+  };
+  reader.readAsDataURL(file);
+}
+
+function deleteProduct(btn){
+  const card = btn.parentElement;
+  document.getElementById('deleteSound').play();
+  card.style.animation = 'exit 0.6s forwards';
+  setTimeout(()=> card.remove(),600);
+}
+</script>
+
+</body>
+</html>
